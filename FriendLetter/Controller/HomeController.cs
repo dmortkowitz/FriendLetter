@@ -8,14 +8,14 @@ namespace FriendLetter.Controllers
     // [Route("/hello")]
     // public string Hello() { return "Hello friend!"; }
 
-    [Route("/goodbye")]
-    public string Goodbye() { return "Goodbye friend."; }
+    // [Route("/goodbye")]
+    // public string Goodbye() { return "Goodbye friend."; }
     [Produces("text/html")]
-    [Route("/")]
+    [Route("/Hello")]
     public ActionResult Hello()
     {
       LetterVariable myLetterVariable = new LetterVariable();
-      myLetterVariable.SetRecipient("Jessica");
+      myLetterVariable.SetRecipient("Lina");
       myLetterVariable.SetSender("John");
       return View(myLetterVariable);
     }
@@ -24,5 +24,19 @@ namespace FriendLetter.Controllers
     {
       return View();
     }
+    [Route("/")]
+    public ActionResult Form()
+    {
+      return View();
+    }
+    [Route("/greeting_card")]
+    public ActionResult GreetingCard()
+    {
+        LetterVariable myLetterVariable = new LetterVariable();
+        myLetterVariable.SetRecipient(Request.Query["recipient"]);
+        myLetterVariable.SetSender(Request.Query["sender"]);
+        return View("Hello", myLetterVariable);
+    }
+
   }
 }
